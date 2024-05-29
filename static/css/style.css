@@ -1,0 +1,15 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    font-size: 60px;
+    font-family: monospace;
+}
+
+.content_page{ /*просто отступы элементов внутри страницы*/
+    margin: 50px 50px;
+    font-size: 18px;
+    font-weight: 600;
+}

@@ -1,21 +1,90 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-</head>
-<body>
-<h1>{{ title }}</h1> <!--Отображение переменной переданной в jinja2-->
-{% for user in users_list %} <!--пример цикла-->
-{% if 'Mike' in user %} <!--пример условия-->
-{{ user | safe }}<br> <!--если поставить safe то теги из строки будут рендериться ! НО ЭТО МОЖЕТ БЫТЬ ОПАСНО !-->
-{% else %}
-{{ user }}<br>
-{% endif %}
-{% endfor %}
-<!--ниже пример работы со словарём, а также использование фильтра capitalize, чтоб имена были с заглавной буквы-->
-<p>Имя: {{ user1.name | capitalize }} | Возраст: {{ user1.age }} | Город: {{ user1.city }}</p>
-<!--Пример фильтра max, также как и в python он находит максимальное число из последовательности-->
-<p>Максимальное число из списка: {{ numbers }} - > {{ numbers | max }}</p>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+<h1>Возможности bootstrap</h1>
+<!--ДАЛЕЕ ОБЗОР ОСНОВНЫХ ЭЛЕМЕНТОВ КОТОРЫЕ МОЖНО ПОДКЛЮЧИТЬ К САЙТУ (НЕ ВСЕХ)-->
+<p>Подключение кнопок с bootstrap:</p>
+<p>
+    <button type="button" class="btn btn-primary">Primary</button>
+    <button type="button" class="btn btn-warning">Warning</button>
+    <button type="button" class="btn btn-info">Info</button>
+    <button type="button" class="btn btn-light">Light</button>
+</p>
+<p>Подключение группы кнопок:</p>
+<div class="btn-group" role="group" aria-label="Basic outlined example">
+    <button type="button" class="btn btn-outline-primary">Left</button>
+    <button type="button" class="btn btn-outline-primary">Middle</button>
+    <button type="button" class="btn btn-outline-primary">Right</button>
+</div>
+
+<p>подключение группы кнопок и combobox (выпадающий список):</p>
+<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-primary">1</button>
+    <button type="button" class="btn btn-primary">2</button>
+
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                aria-expanded="false">
+            Dropdown
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Link 1</a></li>
+            <li><a class="dropdown-item" href="#">Link 2</a></li>
+        </ul>
+    </div>
+</div>
+
+<p>Группа кнопок, можно выбрать одну из (как radio button):</p>
+<div class="btn-group-vertical" role="group" aria-label="Vertical radio toggle button group">
+    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
+    <label class="btn btn-outline-danger" for="vbtn-radio1">Radio 1</label>
+    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
+    <label class="btn btn-outline-danger" for="vbtn-radio2">Radio 2</label>
+    <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio3" autocomplete="off">
+    <label class="btn btn-outline-danger" for="vbtn-radio3">Radio 3</label>
+</div>
+
+
+<p>Вставка изображения:</p>
+<!--в главном классе div class="..." можно задавать стили с bootstrap-->
+<div class="card text-bg-danger mb-3" style="width: 18rem;">
+    <img src="{{url_for('static',filename='img/test_img.JPG')}}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">Вставка картинки</h5>
+        <p class="card-text">Картинка вставляется на страницу с помощью функции url_for, важно чтобы картинка
+            находилась в папке static/img.</p>
+        <a href="#" class="btn btn-primary">Понятно</a>
+    </div>
+</div>
+
+
+<p>Вставка таблицы, таблицы можно кастомизировать как угодно, можно сделать разные цвета ячеек, строк и т.д.:</p>
+<table class="table">
+    <thead>
+    <tr class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="table-secondary">
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+    </tr>
+    <tr class="table-danger">
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+    </tr>
+    <tr class="table-primary">
+        <th scope="row">3</th>
+        <td colspan="2">Larry the Bird</td>
+        <td>@twitter</td>
+    </tr>
+    </tbody>
+</table>
+{% endblock content %}
