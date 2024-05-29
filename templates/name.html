@@ -1,22 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
 {% if name %}
-<h1>Привет {{ name }}!</h1>
+    <!--отображение flash сообщений, в примерах дальше будут рассматриваться также, flash сообщения которые будут
+    меняться в зависимости от категории за счёт параметра category переданного в функции обработчике.
+    flash сообщений можно передавать несколько то есть список-->
+    {% for msg in get_flashed_messages() %} <!--будут показаны все flash сообщения (также можно добавить категории)-->
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Flash message: </strong>{{ msg }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    {% endfor %}
+    <h1>Привет {{ name }}!</h1>
+    <img src="{{ url_for('static',filename='img/test_img2.png') }}" alt="no img">
+    <br><br>
+    <p id="demo">Test text</p> <!--по этому id выполнится java script в данном случае он просто заменит строку-->
+    <script src="{{ url_for('static',filename='js/myfile.js') }}"></script>
+    <br><br>
+    <a href="{{ url_for('index') }}">
+        <button class="btn btn-danger">На главную страницу</button>
+    </a>
+
 {% else %}
-<h1>Flask-WTF валидация форм</h1>
-<p>В flask есть модуль расширение, которое позволяет производить валидацию значений в формах. Класс формы создаётся в
-    модуле main.py (или app.py), где и устанавливается тип поля и проверка какие значения должны быть введены.
-</p>
-<br>
-<form method="POST">
-    {{ form.hidden_tag() }} <!--эта настройка обязательно включена это защита от злоумышленников и атак CSRF-->
-    {{ form.name.label(class="form-label") }} <!--установка label для ввода name + класс для определения стиля BS-->
-    {{ form.name(class="form-control") }} <!--установка поля для ввода name + класс для определения стиля BS-->
+    <h1>Flask-WTF валидация форм</h1>
+    <p>В flask есть модуль расширение, которое позволяет производить валидацию значений в формах. Класс формы создаётся в
+        модуле main.py (или app.py), где и устанавливается тип поля и проверка какие значения должны быть введены.
+    </p>
     <br>
-    {{ form.password.label(class="form-label") }} <!--тоже самое но с паролем-->
-    {{ form.password(class="form-control") }} <!---->
-    <br>
-    {{form.submit(class="btn btn-danger")}} <!--привязка кнопки-->
-</form>
+    <form method="POST">
+        {{ form.hidden_tag() }} <!--эта настройка обязательно включена это защита от злоумышленников и атак CSRF-->
+        {{ form.name.label(class="form-label") }} <!--установка label для ввода name + класс для определения стиля BS-->
+        {{ form.name(class="form-control") }} <!--установка поля для ввода name + класс для определения стиля BS-->
+        <br>
+        {{ form.password.label(class="form-label") }} <!--тоже самое но с паролем-->
+        {{ form.password(class="form-control") }} <!---->
+        <br>
+        {{form.submit(class="btn btn-danger")}} <!--привязка кнопки-->
+    </form>
 {% endif %}
 {% endblock content %}

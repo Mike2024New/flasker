@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired
@@ -32,6 +32,7 @@ def name():
         name_field = form.name.data
         psw_field = form.password.data
         form.name.data = ''
+        flash("Успешно, всё получилось!")  # отправка flash сообщения (также у сообщений ещё есть параметр category)
     return render_template('name.html', name=name_field, psw=psw_field, form=form)
 
 

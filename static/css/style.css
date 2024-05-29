@@ -13,3 +13,8 @@ h1{
     font-size: 18px;
     font-weight: 600;
 }
+
+#demo{ /* назначение стиля к js скрипту */
+    text-size: 24px;
+    color: red;
+}
