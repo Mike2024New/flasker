@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if name %}
+<h1>Привет {{ name }}!</h1>
+{% else %}
+<h1>Flask-WTF валидация форм</h1>
+<p>В flask есть модуль расширение, которое позволяет производить валидацию значений в формах. Класс формы создаётся в
+    модуле main.py (или app.py), где и устанавливается тип поля и проверка какие значения должны быть введены.
+</p>
+<br>
+<form method="POST">
+    {{ form.hidden_tag() }} <!--эта настройка обязательно включена это защита от злоумышленников и атак CSRF-->
+    {{ form.name.label(class="form-label") }} <!--установка label для ввода name + класс для определения стиля BS-->
+    {{ form.name(class="form-control") }} <!--установка поля для ввода name + класс для определения стиля BS-->
+    <br>
+    {{ form.password.label(class="form-label") }} <!--тоже самое но с паролем-->
+    {{ form.password(class="form-control") }} <!---->
+    <br>
+    {{form.submit(class="btn btn-danger")}} <!--привязка кнопки-->
+</form>
+{% endif %}
+{% endblock content %}
