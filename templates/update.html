@@ -30,7 +30,8 @@
         {{ form.favorite_color.label(class='form-label') }}
         {{ form.favorite_color(class='form-control',value=name_to_update.favorite_color) }}
         <br>
-        {{form.submit(class="btn btn-danger", value='Обновить')}} <!--привязка кнопки-->
+        {{form.submit(class="btn btn-warning", value='Обновить')}} <!--привязка кнопки-->
+        <a href="{{ url_for('user_delete',user_id=name_to_update.user_id) }}" class="btn btn-danger">Удалить</a>
         <a href="{{ url_for('user_show') }}" class="btn btn-success">Вернуться к списку</a>
         <br>
     </form>

@@ -116,6 +116,21 @@ def update(user_id):
                                noform=noform)
 
 
+@app.route('/delete/<int:user_id>')
+def user_delete(user_id):
+    user_to_delete = Users.query.get_or_404(user_id)
+    form = FormAddUser()
+    try:
+        db.session.delete(user_to_delete)
+        db.session.commit()
+        flash('Пользователь удалён.', category='succes')
+        return render_template("update.html", noform=True)
+    except Exception as err:
+        logger.error(err)
+        flash("Этого пользователя удалить нельзя", category="error")
+        return render_template("update.html", noform=False, form=form)
+
+
 @app.errorhandler(404)
 def error_application(error):
     logger.error(error)  # логирование
