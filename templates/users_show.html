@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+{% for user in users %}
+<p class="fw-semibold">{{ user.user_id }} <a href="{{ url_for('update', user_id=user.user_id) }}">{{ user.name }}</a>
+    {{ user.email }} - {{ user.favorite_color }}</p>
+{% endfor %}
+<p><a href="{{ url_for('user_add') }}" class="btn btn-success">Добавить пользователя</a>
+    {% endblock content %}

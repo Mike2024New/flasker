@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+{% for cat,msg in get_flashed_messages(True) %}
+{% if cat=="succes" %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Flash message: </strong>{{ msg }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% elif cat=="error" %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Flash message: </strong>{{ msg }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% endfor %}
+
+{% if noform %}
+<a href="{{ url_for('user_show') }}" class="btn btn-warning">Посмотреть список</a>
+{% else %}
+<h1>Обновить пользователя {{ name_to_update.name }}</h1>
+<div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+    <form method="post">
+        {{ form.hidden_tag() }} <!-- защита от sqrc атак (ввода значений с других сайтов) -->
+        {{ form.name.label(class='form-label') }}
+        {{ form.name(class='form-control',value=name_to_update.name) }}
+        <br>
+        {{ form.email.label(class='form-label') }}
+        {{ form.email(class='form-control',value=name_to_update.email) }}
+        <br>
+        {{ form.favorite_color.label(class='form-label') }}
+        {{ form.favorite_color(class='form-control',value=name_to_update.favorite_color) }}
+        <br>
+        {{form.submit(class="btn btn-danger", value='Обновить')}} <!--привязка кнопки-->
+        <a href="{{ url_for('user_show') }}" class="btn btn-success">Вернуться к списку</a>
+        <br>
+    </form>
+</div>
+{% endif %}
+{% endblock content %}

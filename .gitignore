@@ -1,0 +1,5 @@
+.idea/
+instance/
+.venv/
+migrations/
+config.py
