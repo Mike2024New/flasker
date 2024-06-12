@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+<p class="fw-semibold">{{ title }}</p>
+<img src="{{ url_for('static',filename='img/test_img.jpg') }}" height="250px">
+{% endblock content %}

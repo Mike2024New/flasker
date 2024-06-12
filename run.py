@@ -63,6 +63,11 @@ def slot1():
     return redirect(url_for('index'))
 
 
+@app.route('/img')
+def img():
+    return render_template('img.html')
+
+
 @app.route('/user/show')
 def user_show():
     all_users = Users.query.order_by(Users.data_added)  # выгрузить всех пользователей в порядке добавления
@@ -135,7 +140,7 @@ def user_delete(user_id):
 def error_application(error):
     logger.error(error)  # логирование
     msg = "Ошибка 404, такой страницы не существует"
-    return render_template("error.html", msg=msg)
+    return render_template("error.html", msg=msg), 404
 
 
 #
